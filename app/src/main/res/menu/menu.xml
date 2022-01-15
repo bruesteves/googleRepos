@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/outline_search_24"
+        android:title="Search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/grid"
+        android:icon="@drawable/outline_grid_view_24"
+        android:title="View as Grid"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/lines"
+        android:icon="@drawable/outline_view_headline_24"
+        android:title="View as Lines"
+        app:showAsAction="never"/>
+
+</menu>
