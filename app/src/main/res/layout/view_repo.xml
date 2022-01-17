@@ -40,30 +40,16 @@
             tools:text="Name" />
 
         <TextView
-            android:id="@+id/login"
+            android:id="@+id/description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/eighteen"
+            android:textSize="@dimen/sixteen"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/name"
             app:layout_constraintTop_toBottomOf="@+id/name"
-            tools:text="Login" />
-
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_default"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/sixteen"
-            android:visibility="gone"
-            android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginEnd="@dimen/margin_small"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/img"
-            app:layout_constraintTop_toBottomOf="@+id/img"
             tools:text="Description" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

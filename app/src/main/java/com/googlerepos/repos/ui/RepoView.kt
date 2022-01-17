@@ -24,7 +24,6 @@ open class RepoView
         super.onFinishInflate()
 
         img = findViewById(R.id.img)
-        login = findViewById(R.id.login)
         name = findViewById(R.id.name)
         description = findViewById(R.id.description)
     }
@@ -33,7 +32,6 @@ open class RepoView
         Picasso.with(context).load(repo.owner.avatarUrl).into(img)
 
         name.text = repo.name
-        login.text = repo.owner.login
         description.text = repo.description
 
         description.visibility = if(!repo.description.isNullOrEmpty()) View.VISIBLE else View.GONE
