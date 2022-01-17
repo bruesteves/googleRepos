@@ -46,7 +46,10 @@ class ReposAdapter : RecyclerView.Adapter<ReposAdapter.ViewHolder>() {
     }
 
     fun filter(query: String) {
-        reposList = reposList.filter { it.name.contains(query) }.toMutableList()
+        reposList = reposList.filter {
+            it.name.contains(query) or it.defaultBranch.contains(query) or it.openIssuesCount.toString()
+                .contains(query)
+        }.toMutableList()
         notifyDataSetChanged()
     }
 

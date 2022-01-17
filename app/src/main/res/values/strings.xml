@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GoogleRepos</string>
+    <string name="repos_name">Repositories</string>
 </resources>

@@ -6,7 +6,9 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.googlerepos.MainActivity
 import com.googlerepos.R
+import com.googlerepos.repo.ui.RepoFragment
 import com.googlerepos.repos.adapter.ReposAdapter
 import com.googlerepos.repos.viewmodel.ReposViewModel
 import kotlinx.android.synthetic.main.fragment_repos.*
@@ -37,6 +39,7 @@ class ReposFragment : Fragment() {
         viewModel.repos.observe(requireActivity(), {
             it?.let { it1 ->
                 adapter.setItems(it1) {
+                    (activity as MainActivity).addFragment(RepoFragment.newInstance(it), it.name)
                 }
                 recyclerViewRepos.adapter = adapter
                 recyclerViewRepos.layoutManager = LinearLayoutManager(context)
