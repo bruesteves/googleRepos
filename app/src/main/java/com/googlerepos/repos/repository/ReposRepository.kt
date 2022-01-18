@@ -1,4 +1,4 @@
-package com.mindera.rocketscience.launches.repository
+package com.googlerepos.repos.repository
 
 import com.googlerepos.api.retrofit.ReposAPI
 

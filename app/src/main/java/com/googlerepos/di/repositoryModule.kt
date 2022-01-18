@@ -1,6 +1,6 @@
 package com.googlerepos.di
 
-import com.mindera.rocketscience.launches.repository.ReposRepository
+import com.googlerepos.repos.repository.ReposRepository
 import org.koin.dsl.module
 
 val repositoryModule = module {

@@ -5,7 +5,8 @@ import androidx.lifecycle.Observer
 import com.googlerepos.api.model.retrofit.Owner
 import com.googlerepos.api.model.retrofit.Repo
 import com.googlerepos.api.retrofit.ReposAPI
-import com.mindera.rocketscience.launches.repository.ReposRepository
+import com.googlerepos.repos.repository.ReposRepository
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import org.junit.After
@@ -16,8 +17,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.verify
+import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import retrofit2.Response
 
@@ -56,10 +56,23 @@ class ReposViewModelTest {
     @Test
     fun testApiFetchDataSuccess() {
         `when`(apiClient!!.getRepos()).thenReturn(GlobalScope.async { mockList() })
+        `when`(repository.getRepos()).thenReturn(GlobalScope.async { mockList() })
         viewModel!!.getRepos()
+        Thread.sleep(500)
         verify(observer).onChanged(viewModel!!.repos.value)
-        assertTrue(viewModel!!.repos.value == mockList())
+        assertTrue(viewModel!!.repos.value?.get(0)!!.name == mockList().body()?.get(0)!!.name)
     }
+
+    @Test
+    fun testApiFetchDataFailure() {
+        `when`(apiClient!!.getRepos()).thenReturn(GlobalScope.async { mockFailure() })
+        `when`(repository.getRepos()).thenReturn(GlobalScope.async { mockFailure() })
+        viewModel!!.getRepos()
+        Thread.sleep(500)
+        verify(observer).onChanged(viewModel!!.repos.value)
+        assertTrue(viewModel!!.repos.value == null)
+    }
+
 
     @After
     @Throws(Exception::class)
@@ -68,12 +81,16 @@ class ReposViewModelTest {
         viewModel = null
     }
 
-    fun mockList(): Response<List<Repo>> {
+    private fun mockList(): Response<List<Repo>> {
         return Response.success(
             listOf(
                 Repo("repoName", "", Owner("login", "avatar.url"), "master", 0),
                 Repo("repoName", "", Owner("login", "avatar.url"), "master", 0)
             )
         )
+    }
+
+    private fun mockFailure(): Response<List<Repo>> {
+        return Response.error(404, null)
     }
 }
